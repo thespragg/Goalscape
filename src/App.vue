@@ -1,8 +1,10 @@
 <template>
   <Suspense>
-    <RouterView />
+    <div>
+      <RouterView />
+      <Toast />
+    </div>
   </Suspense>
-  <Toast />
 </template>
 
 <script setup lang="ts">

@@ -24,12 +24,10 @@ import Button from 'primevue/button'
 import Toolbar from 'primevue/toolbar'
 import { computed } from 'vue'
 import { useLayout } from '@/composables/useLayout'
-import { useRoute } from 'vue-router'
 
 const { sidebarVisible, isMobile, toggleSidebar } = useLayout()
 
 const currentRouteTitle = computed(() => {
-  const route = useRoute().name!.toString()
-  return route[0]?.toUpperCase() + route.substring(1, route.length)
+  return ''
 })
 </script>

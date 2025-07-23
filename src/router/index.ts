@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AuthenticatedLayout from '@/components/layout/AuthenticatedLayout.vue'
 import { authGuard } from './guards/authGuard'
+import { usernameGuard } from './guards/usernameGuard'
 
 const router = createRouter({
   history: createWebHistory('/OsrsTodo/'),
@@ -14,6 +15,13 @@ const router = createRouter({
           path: '',
           name: 'dashboard',
           component: () => import('@/views/dashboard/DashboardView.vue'),
+          meta: { requiresAuth: true },
+        },
+        {
+          path: '/monthly-stats',
+          name: 'Monthly Stats',
+          component: () => import('@/views/monthlyStats/MonthlyStats.vue'),
+          meta: { requiresAuth: false, requiresUsername: true },
         },
       ],
     },
@@ -39,5 +47,6 @@ const router = createRouter({
 })
 
 router.beforeEach(authGuard)
+router.beforeEach(usernameGuard)
 
 export default router

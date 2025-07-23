@@ -3,18 +3,23 @@
     <template #container>
       <div class="flex flex-col h-full">
         <div class="flex items-center justify-between px-6 shrink-0 h-16">
-          <span class="font-semibold text-2xl text-primary">Osrs Tracker</span>
+          <span
+            class="font-semibold text-2xl text-primary cursor-pointer"
+            @click="router.push({ name: 'dashboard' })"
+            >Osrs Tracker</span
+          >
         </div>
         <div class="overflow-y-auto border-t border-slate-300">
           <ul class="list-none p-0 m-0 overflow-hidden">
             <li>
-              <a
+              <router-link
+                :to="{ name: 'Monthly Stats' }"
                 v-ripple
                 class="flex items-center cursor-pointer p-4 rounded text-surface-700 hover:bg-surface-100 dark:text-surface-0 dark:hover:bg-surface-800 duration-150 transition-colors p-ripple"
               >
                 <i class="pi pi-folder mr-2"></i>
-                <span class="font-medium">Projects</span>
-              </a>
+                <span class="font-medium">Monthly Stats</span>
+              </router-link>
             </li>
             <li>
               <a
@@ -51,11 +56,10 @@
 </template>
 
 <script setup lang="ts">
-import { useUsernames } from '@/composables/useUsernames'
 import { useLayout } from '@/composables/useLayout'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const { sidebarVisible } = useLayout()
-const accounts = useUsernames()
-const usernames = await accounts.usernames()
-console.log({ usernames })
 </script>
