@@ -1,14 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { supabase } from '@/lib/supabase'
+import AuthenticatedLayout from '@/components/layout/AuthenticatedLayout.vue'
+import { authGuard } from './guards/authGuard'
 
 const router = createRouter({
   history: createWebHistory('/OsrsTodo/'),
   routes: [
     {
       path: '/',
-      name: 'dashboard',
-      component: () => import('@/views/DashboardView.vue'),
+      component: AuthenticatedLayout,
       meta: { requiresAuth: true },
+      children: [
+        {
+          path: '',
+          name: 'dashboard',
+          component: () => import('@/views/dashboard/DashboardView.vue'),
+        },
+      ],
     },
     {
       path: '/login',
@@ -31,13 +38,6 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach(async (to, _from, next) => {
-  const user = await supabase.auth.getUser()
-  if (!to.meta['requiresAuth'] || user.data.user !== null) {
-    return next()
-  } else {
-    return next({ name: 'login' })
-  }
-})
+router.beforeEach(authGuard)
 
 export default router

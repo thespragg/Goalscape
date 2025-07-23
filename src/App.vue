@@ -1,10 +1,12 @@
 <template>
-  <div class="w-full">
-    <router-view></router-view>
-  </div>
+  <Suspense>
+    <RouterView />
+  </Suspense>
+  <Toast />
 </template>
 
 <script setup lang="ts">
+import Toast from 'primevue/toast'
 import { onMounted, ref } from 'vue'
 import { supabase } from '@/lib/supabase'
 
