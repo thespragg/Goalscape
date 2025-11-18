@@ -1,39 +1,49 @@
-# OsrsTodo
+# README
 
-This template should help get you started developing with Vue 3 in Vite.
+## Running the Application
 
-## Recommended IDE Setup
+Start all services:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-pnpm install
+```bash
+docker compose up
 ```
 
-### Compile and Hot-Reload for Development
+Run in detached mode:
 
-```sh
-pnpm dev
+```bash
+docker compose up -d
 ```
 
-### Type-Check, Compile and Minify for Production
+Stop all services:
 
-```sh
-pnpm build
+```bash
+docker compose down
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## Services
 
-```sh
-pnpm lint
-```
+- **Client**: http://localhost:3000
+- **Server**: http://localhost:5000
+- **pgAdmin**: http://localhost:5050
+- **PostgreSQL**: localhost:5432
+
+## Adding Database to pgAdmin
+
+1. Open pgAdmin at http://localhost:5050
+2. Right-click **Servers** → **Register** → **Server**
+3. **General** tab:
+   - Name: `goalscape` (or any name)
+4. **Connection** tab:
+   - Host: `postgres`
+   - Port: `5432`
+   - Database: `goalscape`
+   - Username: `goalscape`
+   - Password: `goalscape`
+5. Click **Save**
+
+## Database Credentials
+
+- Host: `postgres` (from within Docker) or `localhost` (from host machine)
+- Database: `goalscape`
+- Username: `goalscape`
+- Password: `goalscape`
